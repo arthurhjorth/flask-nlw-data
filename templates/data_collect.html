@@ -15,4 +15,22 @@
       $("#modelContent").load('/static/{{  model_name }}');
     });
 
+    function unpack_nlogo_list(nlogo_list){
+        var outlist = {};
+        for(let i = 0; i < nlogo_list.length; i++){
+            inner_list = nlogo_list[i];
+            for (let j = 0; j < inner_list.length; j++){
+                outlist[inner_list[0]] = inner_list[1];
+              }
+          }
+        return(outlist);
+      }
+
+    function submit_data(some_data){
+        data = ProcedurePrims.runString('log-data', false);
+        $.get('/submit_data', some_data);
+      }
+
+
 </script>
+
