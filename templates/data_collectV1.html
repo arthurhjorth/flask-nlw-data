@@ -11,8 +11,27 @@
 
 
 <script>
+
+  var model_loaded = false;
+  var _v = 0;
+  const prop = { configurable: true, get: () => _v, set: (v) => { console.log(v); _v = v; } }
+
+  function append_listener(){
+    console.log("Trying to append listener"); 
+    try{
+      Object.defineProperty(world.observer._varManager, "log-now?", prop);
+    }
+    catch(err){
+
+      setTimeout(append_listener, 10);
+    }
+    finally{
+      Object.defineProperty(world.observer._varManager, "log-now?", prop);
+    }
+    }
+
   $(document).ready(function (){
-      $("#modelContent").load('/static/{{  model_name }}');
+      $("#modelContent").load('/static/{{  model_name }}', setTimeout(append_listener, 10));
     });
 
     function unpack_nlogo_list(nlogo_list){
@@ -27,10 +46,9 @@
       }
 
     function submit_data(some_data){
-        data = ProcedurePrims.runString('log-data', false);
+        raw_data = ProcedurePrims.runString('log-data', false);
+        console.log("submitting ");
         $.get('/submit_data', some_data);
       }
-
-
 </script>
 
