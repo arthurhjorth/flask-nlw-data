@@ -21,6 +21,7 @@ def model_version(version, model_name):
 
 @app.route("/submit_data", methods=["POST", "GET"])
 def submit_data():
+    print("received data")
     data = request.args.to_dict()
     print(data)
     return jsonify({})
