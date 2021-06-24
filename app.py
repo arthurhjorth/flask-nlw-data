@@ -1,5 +1,9 @@
+import json, requests, copy
 from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
+
+ur_data = json.load(open('secrets.json'))
+url = "https://staging.quickstorage.scienceathome.org/save"
 
 @app.route("/model/<int:version>/<string:model_name>", methods=["POST", "GET"])
 def model_version(version, model_name):
@@ -13,5 +17,8 @@ def model_version(version, model_name):
 def submit_data():
     print("received data")
     data = request.args.to_dict()
-    print(data)
+    data_dict = copy.deepcopy(ur_data)
+    data_dict['data'] = data
+    r = requests.post(url = secrets['url'], json = data_dict)
+    print(r)
     return jsonify({})
