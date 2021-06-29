@@ -1,6 +1,17 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+.netlogo-header {
+	visibility: hidden;
+}
+.netlogo-tab-area {
+	visibility: hidden;
+}
+.netlogo-display-horizontal {
+	visibility: hidden;
+}
+</style>
 </head> 
 
 <div id="modelContent"></div>
@@ -29,7 +40,7 @@
     }
 
   $(document).ready(function (){
-      $("#modelContent").load('/static/{{  model_name }}', setTimeout(append_listener, 500));
+      	  $("#modelContent").load('/static/{{  model_name }}', setTimeout(append_listener, 500));
     });
 
     function unpack_nlogo_list(nlogo_list){
@@ -52,4 +63,5 @@
           }
       }
 </script>
+
 
