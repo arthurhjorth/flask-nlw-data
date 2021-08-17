@@ -1,0 +1,57 @@
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head> 
+
+<div id="modelContent"></div>
+
+
+
+<script>
+
+  var session_id = Math.floor(Math.random() * 999999999);
+  var model_loaded = false;
+  var _v = 0;
+  const prop = { configurable: true, get: () => _v, set: (v) => { submit_data(v); _v = v; } }
+
+  function append_listener(){
+    console.log("Trying to append listener"); 
+    try{
+      Object.defineProperty(world.observer._varManager, "log-now?", prop);
+    }
+    catch(err){
+
+      setTimeout(append_listener, 500);
+    }
+    finally{
+      Object.defineProperty(world.observer._varManager, "log-now?", prop);
+    }
+    }
+
+  $(document).ready(function (){
+      	  $("#modelContent").load('/static/{{  model_name }}', setTimeout(append_listener, 500));
+    });
+
+    function unpack_nlogo_list(nlogo_list){
+        var outlist = {};
+        outlist['session'] = session_id;
+        for(let i = 0; i < nlogo_list.length; i++){
+            inner_list = nlogo_list[i];
+            for (let j = 0; j < inner_list.length; j++){
+                outlist[inner_list[0]] = inner_list[1];
+              }
+          }
+        return(outlist);
+      }
+
+    function submit_data(some_data){
+        if (some_data == true){
+          var log_data = ProcedurePrims.runString('log-data', true);
+            console.log(log_data);
+	  log_data['session'] = session_id;
+		$.get('/submit_data', {'data' : log_data});
+          }
+      }
+</script>
+
+{% include 'footer.html' %}
