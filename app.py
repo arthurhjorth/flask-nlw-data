@@ -36,7 +36,9 @@ def submit_data():
     print("received data")
     data = request.args.to_dict()
     data_dict = copy.deepcopy(ur_data)
+    session = data['session']
     data_dict['data'] = json.loads(data['data'])
+    data_dict['data']['session'] = session
     print(data_dict)
     r = requests.post(url = url, json = data_dict)
     print(r)
