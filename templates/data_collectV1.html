@@ -66,12 +66,16 @@
         return(outlist);
       }
 
+
     function submit_data(some_data){
         if (some_data == true){
           var log_data = ProcedurePrims.runString('log-data', true);
             console.log(log_data);
-          $.get('/submit_data', unpack_nlogo_list(log_data));
+	  log_data['session'] = session_id;
+		$.get('/submit_data', {'data' : log_data});
           }
+
+
       }
 </script>
 
