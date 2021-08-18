@@ -34,10 +34,12 @@ def submit_smithsonian_data():
 @app.route("/submit_data", methods=["POST", "GET"])
 def submit_data():
     print("received data")
-    data = request.args.to_dict()
+    all_sent_data = request.args.to_dict()
+    logged_data = all_sent_data['data']
+    session = all_sent_data['session']
     data_dict = copy.deepcopy(ur_data)
-    session = data['session']
-    data_dict['data'] = json.loads(data['data'])
+
+    data_dict['data'] = json.loads(logged_data)
     data_dict['data']['session'] = session
     print(data_dict)
     r = requests.post(url = url, json = data_dict)
