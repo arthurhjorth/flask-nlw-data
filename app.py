@@ -36,9 +36,9 @@ def submit_data():
     all_sent_data = request.args.to_dict()
     logged_data = all_sent_data['data']
     session = all_sent_data['session']
-    print(logged_data)
-    print(session)
     data_dict = copy.deepcopy(ur_data)
+    print(logged_data)
+    print(type(logged_data))
     data_dict['data'] = json.loads(logged_data)
     data_dict['data']['session'] = session
 
