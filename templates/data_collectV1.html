@@ -22,19 +22,62 @@
 	visibility: hidden;
 	height: 0px;
 }
+#consentContent{
+  display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 1;
+	z-index:1001;
+}
+
+#consentContent{ 
+	position: absolute;
+	display: none;
+	width: 650px;
+	height: 600px;
+	padding: 16px;
+	border: 16px solid blue;
+	background-color: white;
+	z-index:1002;
+}
+
+#pdfFrame {
+width: 100%;
+height: 500px;
+
+}
 </style>
 </head> 
 
 <div id="modelContent"></div>
+<div id="consentContent">
+  <p>Please read the research study information below before clicking the Continue-button.</p>
+<iframe id="pdfFrame" src="/static/ConFooBioConsent.pdf"></iframe>
+<br/>
+<button onclick="accept()">Continue</button>
+</div>
+
+
 
 
 
 <script>
-
+  var consent_div = $('#consentContent');
   var session_id = Math.floor(Math.random() * 999999999);
   var model_loaded = false;
   var _v = 0;
   const prop = { configurable: true, get: () => _v, set: (v) => { submit_data(v); _v = v; } }
+
+  function show_consent1(){
+        $('#consentContent').fadeIn(300);
+  }
+  function accept(){
+    $('#consentContent').fadeOut(200);
+  }
 
   function append_listener(){
     console.log("Trying to append listener"); 
@@ -42,7 +85,6 @@
       Object.defineProperty(world.observer._varManager, "log-now?", prop);
     }
     catch(err){
-
       setTimeout(append_listener, 500);
     }
     finally{
@@ -52,6 +94,7 @@
 
   $(document).ready(function (){
       	  $("#modelContent").load('/static/{{  model_name }}', setTimeout(append_listener, 500));
+          show_consent1();
     });
 
     function unpack_nlogo_list(nlogo_list){
@@ -76,5 +119,7 @@
 
       }
 </script>
+
+
 
 {% include 'footer.html' %}
