@@ -148,6 +148,10 @@ width: 100%;
 
       }
 
+      function hideInstructions(){
+	      $("#instructions").fadeOut(200);
+      }
+
       function show_instructions(){
         $("#instructions").load('/static/ConFooBioInstructions.html');
         $("#instructions").show();
@@ -157,4 +161,4 @@ width: 100%;
 
 
 
-{% include 'footer.html' %}
+{% include 'footer_stirling.html' %}
