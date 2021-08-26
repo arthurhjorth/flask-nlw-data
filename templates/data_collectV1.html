@@ -22,6 +22,27 @@
 	visibility: hidden;
 	height: 0px;
 }
+#instructions{ 
+  display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 1;
+	z-index:1001;
+	position: absolute;
+	display: none;
+	width: 650px;
+	height: 600px;
+	padding: 16px;
+	border: 16px solid blue;
+	background-color: white;
+	z-index:1002;
+  overflow: auto;
+}
+
 #consentContent{
   display: none;
 	position: fixed;
@@ -57,14 +78,16 @@ width: 100%;
 }
 </style>
 </head> 
-
+<button onclick="show_instructions()">Show Instructions</button>
 <div id="modelContent"></div>
+<div id="instructions"></div>
 <div id="consentContent">
   <p>Please read the research study information below, then <strong>scroll to the bottom</strong> to click the Continue-button.</p>
 <img class="consent-img" src="/static/ConFooBioConsent.png-1.png"/> <img class="consent-img" src="/static/ConFooBioConsent.png-2.png"/> 
 <br/>
 <button onclick="accept()">Continue</button>
 </div>
+
 
 
 
@@ -122,6 +145,12 @@ width: 100%;
 		$.get('/submit_data', {'data' : log_data, 'session' : session_id, 'condition' : jQuery.url.param("condition")});
           }
 
+
+      }
+
+      function show_instructions(){
+        $("#instructions").load('/static/ConFooBioInstructions.html');
+        $("#instructions").show();
 
       }
 </script>
