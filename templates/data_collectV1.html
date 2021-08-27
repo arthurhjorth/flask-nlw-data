@@ -94,6 +94,7 @@ width: 100%;
 
 
 <script>
+  console.log({{group}});
   var consent_div = $('#consentContent');
   var session_id = Math.floor(Math.random() * 999999999);
   var model_loaded = false;
@@ -142,7 +143,7 @@ width: 100%;
     function submit_data(some_data){
         if (some_data == true){
           	var log_data = ProcedurePrims.runString('log-data', true);
-		$.get('/submit_data', {'data' : log_data, 'session' : session_id, 'condition' : jQuery.url.param("condition")});
+		$.get('/submit_data', {'data' : log_data, 'session' : session_id, 'group' : {{ group }}});
           }
 
 

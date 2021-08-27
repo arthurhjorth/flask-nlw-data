@@ -6,6 +6,13 @@ ur_data = json.load(open('secrets.json'))
 url = "https://staging.quickstorage.scienceathome.org/save"
 
 
+
+@app.route('/crops_vs_creatures/<int:group>/game/')
+def crops_vs_creatures(group):
+    model_name = "ConFooBio.html"
+    return render_template('data_collectV1.html', model_name = model_name, group = group)
+
+
 @app.route("/test/<string:model_name>", methods=["POST", "GET"])
 def test(model_name):
     print(f"serving {model_name} on test")
@@ -37,11 +44,11 @@ def submit_data():
     logged_data = all_sent_data['data']
     session = all_sent_data['session']
     data_dict = copy.deepcopy(ur_data)
-    print(logged_data)
-    print(type(logged_data))
     data_dict['data'] = json.loads(logged_data)
     data_dict['data']['session'] = session
-
-    print(data_dict)
+    print(all_sent_data.keys())
+    if 'group' in all_sent_data:
+        data_dict['data']['group'] = all_sent_data['group']
+    print(data_dict.keys())
     r = requests.post(url = url, json = data_dict)
     return jsonify({})
