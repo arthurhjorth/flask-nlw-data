@@ -22,7 +22,7 @@
 	visibility: hidden;
 	height: 0px;
 }
-#instructions{ 
+#instructions{
   display: none;
 	position: fixed;
 	top: 0%;
@@ -55,7 +55,7 @@
 	z-index:1001;
 }
 
-#consentContent{ 
+#consentContent{
 	position: absolute;
 	display: none;
 	width: 650px;
@@ -77,13 +77,13 @@ height: 500px;
 width: 100%;
 }
 </style>
-</head> 
+</head>
 <button onclick="show_instructions()">Show Instructions</button>
 <div id="modelContent"></div>
 <div id="instructions"></div>
 <div id="consentContent">
   <p>Please read the research study information below, then <strong>scroll to the bottom</strong> to click the Continue-button.</p>
-<img class="consent-img" src="/static/ConFooBioConsent.png-1.png"/> <img class="consent-img" src="/static/ConFooBioConsent.png-2.png"/> 
+<img class="consent-img" src="/static/ConFooBioConsent.png-1.png"/> <img class="consent-img" src="/static/ConFooBioConsent.png-2.png"/>
 <br/>
 <button onclick="accept()">Continue</button>
 </div>
@@ -109,7 +109,7 @@ width: 100%;
   }
 
   function append_listener(){
-    console.log("Trying to append listener"); 
+    console.log("Trying to append listener");
     try{
       Object.defineProperty(world.observer._varManager, "log-now?", prop);
     }
